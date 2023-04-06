@@ -268,38 +268,38 @@
                 </div>
                 <div class="row mb_30">
                     <div class="col-lg-4 col-md-6 faci">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/bedroom.png" style="width: 30px;"  alt="">    <span style="margin-left: 35px;" class="faci">Ac Room</span></h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi, repellat?</p>-->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/bed.png" style="width: 30px;"  alt="">  <span style="margin-left: 20px;">Non Ac Room</span></h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, culpa.</p>-->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/wifi.png"  style="width: 25px;" alt=""><span style="margin-left: 30px;">Wifi Access</span></h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, natus!</p>-->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/water-boiler.png" style="width: 35px;" alt=""><span style="margin-left: 30px;">Water Gijar</span>
                             </h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, ad!</p>-->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/generator.png" style="width: 25px;" alt=""> <span style="margin-left: 35px;">Generator</span> </h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur, iusto.</p>-->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/restaurant-cutlery-circular-symbol-of-a-spoon-and-a-fork-in-a-circle.png" style="width: 30px;"  alt=""> <span style="margin-left: 20px;"><span style="margin-left: 20px;">Restaurant</span> </h4>
 <!--
                             <p style="text-align: center;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, corporis.
@@ -310,21 +310,21 @@
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/parking.png" style="width: 30px;"  alt=""> <span style="margin-left: 20px;"><span style="margin-left: 25px;">Parking</span> </h4>
 <!--                            <p style="text-align: center;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla, dignissimos?</p>-->
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/car.png" style="width: 30px;"  alt=""> <span style="margin-left: 12px;"><span style="margin-left: 20px;">Rent a car</span> </h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, harum.</p>-->
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                        <div class="facilities_item">
+                        <div class="facilities_item" style="height:100px">
                             <h4 class="sec_h4"><img src="./image/Hotel-jafran/golf/cleaning-cart.png" style="width: 30px;"  alt=""> <span style="margin-left: 5px;"><span style="margin-left: 20px;">Room Service</span> </h4>
 <!--                            <p style="text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, harum.</p>-->
                         </div>

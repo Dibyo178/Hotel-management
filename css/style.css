@@ -831,8 +831,8 @@ button:focus {
   padding: 31px 40px 37px;
   color: #fff;
   margin-bottom: 30px;
-  width: 19.875rem;
-  height:0px;
+  /* width: 19.875rem; */
+ 
   transition: 1s ease-in-out;
   border: none;
 }
@@ -3612,3 +3612,4 @@ h1, h2, h3, h4, h5, h6 {
 ion-icon {
   pointer-events: none;
 }
+

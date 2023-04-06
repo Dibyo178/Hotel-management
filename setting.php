@@ -1,8 +1,10 @@
 <?php
 
+// require('script.php');
 require('alert.php');
-require('script.php');
 adminLogin();
+
+
 
 ?>
 
@@ -110,56 +112,56 @@ adminLogin();
                                 <i class="bi bi-pencil-square"></i> Edit
                             </button>
 
-                            </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-
-                                    <form>
-
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">General Setting</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Site Title</label>
-                                                    <textarea class="form-control  shadow-none"  name="site_title"  rows="1" id="site_title_inp"></textarea>
-                                                    <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">About Us</label>
-                                                    <textarea class="form-control  shadow-none"  name="site_about"  rows="1" id="site_about_inp"></textarea>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="modal-footer">
- <button type="button" onclick="site_title.value=general_data.s_name, site_about.value=general_data.s_about" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
- <button type="button" onclick="upd_general(site_title.value,site_about.value)"   class="btn btn-success shadow-none">Submit</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-
-
-                                </div>
-                            </div>
-
-
                         </div>
 
-                        <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
-                        <p class="card-text" id="site_title"></p>
-                        <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
-                        <p class="card-text" id="site_about"></p>
+                        <!-- Modal -->
+                        <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+
+                                <form>
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">General Setting</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Site Title</label>
+                                                <textarea class="form-control  shadow-none" name="site_title" rows="1" id="site_title_inp"></textarea>
+                                                <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">About Us</label>
+                                                <textarea class="form-control  shadow-none" name="site_about" rows="1" id="site_about_inp"></textarea>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" onclick="site_title.value=general_data.s_name, site_about.value=general_data.s_about" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" onclick="upd_general(site_title.value,site_about.value)" class="btn btn-success shadow-none">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+                        </div>
+
 
                     </div>
-                
+
+                    <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
+                    <p class="card-text" id="site_title"></p>
+                    <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
+                    <p class="card-text" id="site_about"></p>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -170,43 +172,42 @@ adminLogin();
     <!-- Get Data -->
 
     <script>
-
         let general_data;
 
-        function get_general(){
+        function get_general() {
 
             let site_title = document.getElementById('site_title');
 
             let site_about = document.getElementById('site_about');
 
- 
-        let site_title_inp = document.getElementById('site_title_inp');
 
-        let site_about_inp = document.getElementById('site_about_inp');
+            let site_title_inp = document.getElementById('site_title_inp');
+
+            let site_about_inp = document.getElementById('site_about_inp');
 
 
-            let xhr=new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
 
             // xhr.open("POST","ajax/settings_crud.php",true);
 
-            xhr.open("POST","settings_crud.php",true);
+            xhr.open("POST", "settings_crud.php", true);
 
-            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            xhr.onload= function(){
+            xhr.onload = function() {
 
-                general_data=JSON.parse(this.responseText);
+                general_data = JSON.parse(this.responseText);
 
-                site_title.innerText=general_data.s_name;
+                site_title.innerText = general_data.s_name;
 
-                site_about.innerText=general_data.s_about;
+                site_about.innerText = general_data.s_about;
 
 
-                site_title_inp.innerText=general_data.s_name;
+                site_title_inp.innerText = general_data.s_name;
 
-                site_about_inp.innerText=general_data.s_about;
+                site_about_inp.innerText = general_data.s_about;
 
-                
+
                 //  console.log(general_data);
 
 
@@ -217,52 +218,50 @@ adminLogin();
 
 
 
-        function upd_general(site_title_val,site_about_val){
-           
+        function upd_general(site_title_val, site_about_val) {
 
-            let xhr=new XMLHttpRequest();
+
+            let xhr = new XMLHttpRequest();
 
             // xhr.open("POST","ajax/settings_crud.php",true);
 
-            xhr.open("POST","settings_crud.php",true);
+            xhr.open("POST", "settings_crud.php", true);
 
-            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            xhr.onload= function(){
+            xhr.onload = function() {
 
 
-            var myModal = document.getElementById('general-s');
-           var modal = bootstrap.Modal.getInstance(myModal);
-              modal.hide();
+                var myModal = document.getElementById('general-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
 
-              if(this.responseText==1){
-                 
-                  console.log("data updated");
-                  get_general();
-              }
+                if (this.responseText == 1) {
 
-              else{
+                     alert('success','Changes saved!');
 
-                console.log("no change made");
- 
+                    get_general();
+                } else {
 
-              }
+                    alert('error','No-Changes saved!');
 
-              
+
+                }
+
+
 
             }
 
-            xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
-             
+            xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&upd_general');
+
 
         }
- 
-      window.onload= function() {
-      
-          get_general();
 
-      } 
+        window.onload = function() {
 
+            get_general();
+
+        }
     </script>
 
 

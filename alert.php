@@ -23,6 +23,7 @@ function redirect($url){
     $bg_class= ($type=="success")?"alert-success":"alert-danger";  
    
     echo  <<<alert
+  
     <div class="alert $bg_class alert-dismissible custom-alert fade show" role="alert">
     <strong class="me-3">$msg</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,6 +32,19 @@ function redirect($url){
   </div>
    
 alert;
+ }
+
+ function uploadImage($image,$folder){
+   
+    $valid_mime = ['image/jpeg','image/png','image/webp'];
+
+    $img_mime = $image['type'];
+
+    if(!in_array($img_mime,$valid_mime)){
+
+      
+    }
+   
  }
 
 ?>

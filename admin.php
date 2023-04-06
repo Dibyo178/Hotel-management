@@ -111,7 +111,8 @@ error_reporting(0);
 
         //     print_r($res);
 
-        if ($res->num_rows == 1) {
+        // if ($res->num_rows == 1) {
+            if ($res) {
             $row= mysqli_fetch_assoc($res);
            
             $_SESSION['adminLogin']= true;

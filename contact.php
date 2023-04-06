@@ -1,3 +1,34 @@
+<?php
+
+ require('connection.php');
+ require('alert.php');
+
+
+ if(isset($_POST['send'])){
+
+    $frm_data= filteration($_POST);
+
+    $q="INSERT INTO `user_queries`(`name`,`email`,`subject`,`message`) VALUES(?,?,?,?)";
+
+    // $q="INSERT INTO user_queries(name,email,subject,message) VALUES('name','email','subject','message')";
+   
+    $values= [$frm_data['name'],$frm_data['email'],$frm_data['subject'],$frm_data['message']];
+    
+     $res= insert($q,$values,'ssss');
+
+     if($res==1){
+        alert('success','Mail Sent!');
+     }
+     else{
+        alert('error','server down');
+     }
+
+     $con->close();
+
+ }
+
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,6 +47,21 @@
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/responsive.css">
+
+
+<style>
+
+.custom-alert{
+
+  position: fixed;
+  width: 12%;
+  top: 5.3125rem;
+  right: 25px;
+  z-index: 10;
+}
+</style>
+
+
     </head>
     <body>
         <!--================Header Area =================-->
@@ -90,25 +136,25 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                        <form class="row contact_form" method="post">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter your name">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+                                    <input type="email" class="form-control"  name="email" placeholder="Enter email address">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+                                    <input type="text" class="form-control"  name="subject" placeholder="Enter Subject">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
+                                    <textarea class="form-control" name="message"  rows="1" placeholder="Enter Message"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
-                                <button type="submit" value="submit" class="btn theme_btn button_hover">Send Message</button>
+                                <button name="send"  value="submit" class="btn theme_btn button_hover">send</button>
                             </div>
                         </form>
                     </div>
@@ -226,6 +272,9 @@
         </div>
         <!--================End Contact Success and Error message Area =================-->
         
+
+
+
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
