@@ -1,5 +1,16 @@
 <?php
 
+define('SITE_URL','http://localhost/Hotel%20zafran/Hotel-zafran/');
+
+define('ABOUT_IMG_PATH',SITE_URL.'/image/about');
+
+ 
+// backend purpose data
+
+define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'image/');
+
+define('ABOUT_FOLDER','about/');
+
 function adminLogin(){
 
   session_start();
@@ -34,17 +45,73 @@ function redirect($url){
 alert;
  }
 
- function uploadImage($image,$folder){
+//  function uploadImage($image,$folder){
    
-    $valid_mime = ['image/jpeg','image/png','image/webp'];
+//     $valid_mime = ['image/jpeg','image/png','image/webp'];
 
-    $img_mime = $image['type'];
+//     $img_mime = $image['type'];
 
-    if(!in_array($img_mime,$valid_mime)){
-
+//     if(!in_array($img_mime,$valid_mime)){
       
-    }
+//        return 'inv_img'; //invallid imager mime for formet
+
+//     }
+//     else if(($image['size']/(1024*1024))>2){
+//       return  'inv_size';
+//     }
+//     else{
+
+//        $text = pathInfo($image['name'],PATHINFO_EXTENSION);
+
+//        $rname= 'IMG'.random_int(11111,99999).".$text";
+
+//        $img_path = UPLOAD_IMAGE_PATH.$folder.$rname;
+
+//        if(move_uploaded_file($image['tmp_name'],$img_path)){
    
- }
+//              return $rname;
+//        }
+      
+//         else{
+//           return 'upload failed';
+//         }
+
+//     }
+//  }
+
+function uploadSVGImage($image,$folder){
+   
+  $valid_mime = ['image/svg+xml'];
+
+  $img_mime = $image['type'];
+
+  if(!in_array($img_mime,$valid_mime)){
+    
+     return 'inv_img'; //invallid imager mime for formet
+
+  }
+  else if(($image['size']/(1024*1024))>1){
+    return  'inv_size';
+  }
+  else{
+
+     $ext = pathInfo($image['name'],PATHINFO_EXTENSION);
+
+     $rname= 'IMG_'.random_int(11111,99999).".$ext";
+
+     $img_path = UPLOAD_IMAGE_PATH.$folder.$rname;
+
+     if(move_uploaded_file($image['tmp_name'],$img_path)){
+ 
+           return $rname;
+     }
+    
+      else{
+        return 'upd_falied';
+      }
+
+  }
+}
+
 
 ?>

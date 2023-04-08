@@ -4,31 +4,69 @@ require('alert.php');
 adminLogin();
 
 
+// facility
+
+// if(isset($_POST['submit'])){
+
+   
+
+//   $name=$_POST['name'];
+
+//   $desc= $_POST['desc'];
+
+//    $imageName= $_FILES ['image']['name'];
+
+//    $tmpname = $_FILES['image']['tmp_name'];
+
+//    $uploc =  'image/'.$imageName;
+
+//    $q= "INSERT INTO facilities_item ( icon, name, desc) VALUES ('$imageName','$name',' $desc')";
+
+
+//    if(mysqli_query($con,$q) == TRUE){
+
+//     move_uploaded_file($tmpname,$uploc);
+ 
+//      echo "data insert";
+     
+    
+
+//    }
+
+//    else{
+//     echo "no data ";
+//    }
+
+
+// }
+
+
+
+
+
+
+
 
 // DELETE
 
-if(isset($_GET['del'])){
+if (isset($_GET['del'])) {
 
-  $frm_data= filteration($_GET);
+  $frm_data = filteration($_GET);
 
-  if($frm_data['del']=='all'){
+  if ($frm_data['del'] == 'all') {
 
-    $q="DELETE FROM `user_queries`";
+    $q = "DELETE FROM `user_queries`";
 
 
 
-    mysqli_query($con,$q);
+    mysqli_query($con, $q);
+  } else {
 
-  
-   
-  }
-  else{
+    $q = "DELETE FROM `user_queries` WHERE `u_id`=?";
 
-    $q="DELETE FROM `user_queries` WHERE `u_id`=?";
+    $values = [$frm_data['del']];
 
-    $values=[$frm_data['del']];
-
-    delete($q,$values,'i');
+    delete($q, $values, 'i');
 
     // $result=;
 
@@ -68,6 +106,7 @@ if(isset($_GET['del'])){
       position: fixed;
       height: 100%;
     }
+
     /* .custom-alert{
 
 position: fixed;
@@ -82,10 +121,10 @@ z-index: 100;
       #dashboard_menu {
         width: 100%;
         height: auto;
-        
+
       }
 
-      #main-content{
+      #main-content {
 
         margin-top: 60px;
       }
@@ -106,7 +145,7 @@ z-index: 100;
 
   </div>
 
-  <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu" >
+  <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu">
 
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="container-fluid flex-lg-column align-items-stretch">
@@ -129,7 +168,7 @@ z-index: 100;
             <li class="nav-item">
               <a class="nav-link text-white" href="features.php">Facilites</a>
             </li>
-   
+
 
 
             <li class="nav-item">
@@ -154,26 +193,26 @@ z-index: 100;
   <div class="container-fluid" id="main-content">
     <div class="row">
       <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-       <h3>Edit Facilites</h3>
+        <h3>Edit Facilites</h3>
 
 
-       <div class="card border-0 shadow-sm mb-4">
-         <div class="card-body">
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
 
-         <div class="d-flex align-items-center justify-content-between mb-3">
-           <h5 class="card-title m-0 ">
-             Features
-           </h5>
-  
-            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-5">
-                
-             <i class="bi bi-plus-square"></i> Add
-    
-            </button>
-            
-         </div>
-           
-          <!-- <div class="text-end mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="card-title m-0 ">
+                Features
+              </h5>
+
+              <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-5">
+
+                <i class="bi bi-plus-square"></i> Add
+
+              </button>
+
+            </div>
+
+            <!-- <div class="text-end mb-4">
           <a href="?del=all" class="btn btn-danger rounded-pill shadow-none btn-sm">
           
             <i class="bi bi-trash"></i>Delete All
@@ -181,387 +220,439 @@ z-index: 100;
           </a>
 
           </div> -->
-              
-          <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
-          <table class="table table-hover border">
-  <thead>
-    <tr class="bg-dark text-light" >
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-    
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody id="features_data">
 
-  </tbody>
-</table>
+            <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
+              <table class="table table-hover border">
+                <thead>
+                  <tr class="bg-dark text-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="features_data">
+
+                </tbody>
+              </table>
+            </div>
           </div>
-         </div>
-       </div>
+        </div>
 
 
-<!-- Facilities 2 -->
+        <!-- Facilities 2 -->
 
-  
-<div class="card border-0 shadow-sm mb-4">
-         <div class="card-body">
 
-         <div class="d-flex align-items-center justify-content-between mb-3">
-           <h5 class="card-title m-0 ">
-            Facilities
-           </h5>
-  
-            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
-                
-             <i class="bi bi-plus-square"></i> Add
-    
-            </button>
-            
-         </div>
-           
-       
-              
-          <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
-          <table class="table table-hover border">
-          <thead>
-  <!-- <thead class="sticky-top"> -->
-    <tr class="bg-dark text-light" >
-      <th scope="col">#</th>
-      <th scope="col">Icon</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody id="facility_data">
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
 
-  </tbody>
-</table>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 class="card-title m-0 ">
+                Facilities
+              </h5>
+
+              <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
+
+                <i class="bi bi-plus-square"></i> Add
+
+              </button>
+
+            </div>
+
+
+
+            <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
+              <table class="table table-hover border">
+                <thead>
+                  <!-- <thead class="sticky-top"> -->
+                  <tr class="bg-dark text-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Icon</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="facility_data">
+
+                </tbody>
+              </table>
+            </div>
           </div>
-         </div>
-       </div>
+        </div>
 
 
 
-      </div>
+      <!-- </div>
     </div>
-  </div>
+  </div> -->
 
-  
-  
-                        <!-- Features Modal -->
-                        <div class="modal fade" id="feature-5" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
 
-                                <form id="features_s_form">
 
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Add Features</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
-                                        </div>
-                                        <div class="modal-body">
+  <!-- Features Modal -->
+  <div class="modal fade" id="feature-5" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
 
-                                            <div class="mb-3">
-                                                <label class="form-label">Name</label>
-                                                <textarea class="form-control  shadow-none" name="features_name" rows="1" ></textarea>
-                                                <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
-                                            </div>
+      <form id="features_s_form">
 
-                                            <!-- <div class="mb-3">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Features</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <textarea class="form-control  shadow-none" name="features_name" rows="1"></textarea>
+              <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
+            </div>
+
+            <!-- <div class="mb-3">
                                                 <label class="form-label">About Us</label>
                                                 <textarea class="form-control  shadow-none" name="site_about" rows="1" id="site_about_inp"></textarea>
                                             </div> -->
 
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="reset"  class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit"  class="btn btn-success shadow-none">Submit</button>
-                                        </div>
-                                    </div>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success shadow-none">Submit</button>
+          </div>
+        </div>
 
-                                </form>
+      </form>
 
 
-                            </div>
-                        </div>
+    </div>
+  </div>
 
 
-                        <!-- Facility Modal -->
+  <!-- New modal of facility -->
 
-                        
-                     
-                        <div class="modal fade" id="facility-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
 
-                                <form id="facility_s_form">
 
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Add Facilities</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
-                                        </div>
-                                        <div class="modal-body">
+  <div class="modal fade" id="facility-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
 
-                                            <div class="mb-3">
-                                                <label class="form-label">Name</label>
-                                                <textarea class="form-control  shadow-none" name="facility_name" rows="1" ></textarea>
-                                                <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
-                                            </div>
+      <form id="facility_form" method="post" enctype="multipart/form-data">
 
-                                            <div class="mb-3">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Features</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
+          </div>
+          <div class="modal-body">
 
-                                            <label for="" class="form-label fw-bold">Icon</label>
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <textarea class="form-control  shadow-none" name="name" rows="1"></textarea>
+              <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
+            </div>
 
-                                            <input type="file" name="facility_icon" accept=".jpeg,.jpg,.png,.hvg,.webp" class="form-control">
 
-                                            </div>
+            <div class="mb-3">
 
-                                           <div class="mb-3">
+              <label for="" class="form-label fw-bold">Icon</label>
 
-                                           <label class="form-label">Description</label>
+              <input type="file" name="image" id="image" accept=".jpg , .png"  value="" class="form-control">
 
-                                           <textarea class="form-control shadow-none" name="facility_desc" rows='3'></textarea>
+            </div>
 
-                                           </div>
+            <div class="mb-3">
 
+              <label class="form-label">Description</label>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="reset"  class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit"  class="btn btn-success shadow-none">Submit</button>
-                                        </div>
-                                    </div>
+              <textarea class="form-control shadow-none" name="desc" rows='3'></textarea>
 
-                                </form>
+            </div>
 
+            <!-- <div class="mb-3">
+                                                <label class="form-label">About Us</label>
+                                                <textarea class="form-control  shadow-none" name="site_about" rows="1" id="site_about_inp"></textarea>
+                                            </div> -->
 
-                            </div>
-                        </div>
-    
-                        <!-- Facility Modal end -->
 
-                       
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" name="submit" class="btn btn-success shadow-none">Submit</button>
+          </div>
+        </div>
 
- 
- <script>
+      </form>
 
-let features_s_form = document.getElementById('features_s_form');
 
-let facility_s_form = document.getElementById('facility_s_form');
+    </div>
+  </div>
 
-features_s_form.addEventListener('submit',function(e){
-      
-  e.preventDefault();
-  add_features();
 
-});
+  <!-- Facility Modal -->
 
-function add_features(){
 
- let data= new FormData();
- 
- data.append('name',features_s_form.elements['features_name'].value);
- 
- data.append('add_features','');
 
- let xhr = new XMLHttpRequest();
+  <!-- <div class="modal fade" id="facility-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
 
- xhr.open("POST", "features_crud.php", true);
+      <form id="facility_s_form">
 
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Facilities</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
+          </div>
+          <div class="modal-body">
 
- xhr.onload = function() {
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <textarea class="form-control  shadow-none" name="facility_name" rows="1"></textarea>
+            
+            </div>
 
+            <div class="mb-3">
 
-var myModal = document.getElementById('feature-5');
-var modal = bootstrap.Modal.getInstance(myModal);
-modal.hide();
+              <label for="" class="form-label fw-bold">Icon</label>
 
-if (this.responseText == 1) {
+              <input type="file" name="facility_icon" accept=".svg" class="form-control">
 
-  // alert('success','New Features add');
+            </div>
 
-  swal("Good job!", "Facilities Add", "success");
+            <div class="mb-3">
 
-  features_s_form.elements['features_name'].value='';
+              <label class="form-label">Description</label>
 
-  get_features();
+              <textarea class="form-control shadow-none" name="facility_desc" rows='3'></textarea>
 
+            </div>
 
-} else {
 
- alert('error','server down');
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success shadow-none">Submit</button>
+          </div>
+        </div>
 
+      </form>
 
-}
 
+    </div>
+  </div> -->
 
-}
+  <!-- Facility Modal end -->
 
-xhr.send(data);
 
-}
 
-function get_features() {
 
-  let xhr = new XMLHttpRequest();
+  <script>
+    let features_s_form = document.getElementById('features_s_form');
 
-  xhr.open("POST", "features_crud.php", true);
+    let facility_s_form = document.getElementById('facility_form');
 
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-  xhr.onload = function(){
- document.getElementById('features_data').innerHTML=this.responseText;
+    features_s_form.addEventListener('submit', function(e) {
 
-  }
+      e.preventDefault();
+      add_features();
 
-
-  xhr.send('get_features');
-}
-
-
-
-function rem_feature(val) {
-
-let xhr = new XMLHttpRequest();
-
-xhr.open("POST", "features_crud.php", true);
-
-xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-xhr.onload = function(){
-  if (this.responseText == 1) {
-
-// alert('success','New Features add');
-swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-    swal("Poof! Your facilities been deleted!", {
-      icon: "success",
     });
-  } else {
-    swal("Your Facilities is safe!");
-  }
-});
 
-get_features();
+    function add_features() {
 
+      let data = new FormData();
 
-} else if(this.responseText == 'room-added'){
+      data.append('name', features_s_form.elements['features_name'].value);
 
-  swal("Error", "Facilities added in room", "error");
-}
+      data.append('add_features', '');
 
+      let xhr = new XMLHttpRequest();
 
+      xhr.open("POST", "features_crud.php", true);
 
 
-else {
-
-swal("Server Down");
+      xhr.onload = function() {
 
 
-}
+        var myModal = document.getElementById('feature-5');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
 
-}
+        if (this.responseText == 1) {
+
+          // alert('success','New Features add');
+
+          swal("Good job!", "Facilities Add", "success");
+
+          features_s_form.elements['features_name'].value = '';
+
+          get_features();
 
 
-xhr.send('rem_feature='+val);
-}
+        } else {
+
+          alert('error', 'server down');
 
 
-//  facility 2
+        }
 
-facility_s_form.addEventListener('submit',function(e){
-      
+
+      }
+
+      xhr.send(data);
+
+    }
+
+    function get_features() {
+
+      let xhr = new XMLHttpRequest();
+
+      xhr.open("POST", "features_crud.php", true);
+
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onload = function() {
+        document.getElementById('features_data').innerHTML = this.responseText;
+
+      }
+
+
+      xhr.send('get_features');
+    }
+
+
+
+    function rem_feature(val) {
+
+      let xhr = new XMLHttpRequest();
+
+      xhr.open("POST", "features_crud.php", true);
+
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onload = function() {
+        if (this.responseText == 1) {
+
+          // alert('success','New Features add');
+          swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                swal("Poof! Your facilities been deleted!", {
+                  icon: "success",
+                });
+              } else {
+                swal("Your Facilities is safe!");
+              }
+            });
+
+          get_features();
+
+
+        } else if (this.responseText == 'room-added') {
+
+          swal("Error", "Facilities added in room", "error");
+        } else {
+
+          swal("Server Down");
+
+
+        }
+
+      }
+
+
+      xhr.send('rem_feature=' + val);
+    }
+
+
+    //  facility 2
+
+    facility_s_form.addEventListener('submit', function(e) {
+
       e.preventDefault();
       add_facility();
-    
+
     });
 
 
 
-  function add_facility(){
+    function add_facility() {
 
-let data= new FormData();
+      let data = new FormData();
 
-data.append('name',facility_s_form.elements['facility_name'].value);
-data.append('icon',facility_s_form.elements['facility_icon'].files[0]);
-data.append('dec',facility_s_form.elements['facility_desc'].value);
+      data.append('name', facility_s_form.elements['facility_name'].value);
+      data.append('icon', facility_s_form.elements['facility_icon'].files[0]);
+      data.append('desc', facility_s_form.elements['facility_desc'].value);
 
-data.append('add_facility','');
+      data.append('add_facility', '');
 
-let xhr = new XMLHttpRequest();
+      let xhr = new XMLHttpRequest();
 
-xhr.open("POST", "features_crud.php", true);
-
-
-xhr.onload = function() {
+      xhr.open("POST", "features_crud.php", true);
 
 
-var myModal = document.getElementById('facility_data');
-var modal = bootstrap.Modal.getInstance(myModal);
-modal.hide();
+      xhr.onload = function() {
+          
+         console.log(this.responseText)
+          
+       var myModal = document.getElementById('facility-s');
+       var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
 
-if (this.responseText == 'inv_img') {
+        if (this.responseText == 'inv_img') {
 
- // alert('success','New Features add');
+          // alert('success','New Features add');
 
- swal("warning", "Only SVG ,JPG,JPEG,PNG image are allowed", "error");
-
-
-
-//  features_s_form.elements['features_name'].value='';
- 
-
-//  get_features();
-
-}
-
-else if (this.responseText == 'inv_size') {
-swal("warning", "Image should be less then 1MB !", "error");
-
-}
-else if (this.responseText == 'upd_failed') {
-swal("warning", "Image upload failed.Server Down !", "error");
-
-}
-
-else {
-
-  swal("Done", "New Facility Added !", "success");
-  facility_s_form.reset();
-
-}
+          swal("warning", "Only SVG image are allowed", "error");
 
 
-}
 
-xhr.send(data);
-
-}
+          //  features_s_form.elements['features_name'].value='';
 
 
-window.onload =  function(){
-  
-   get_features();
+          //  get_features();
 
-}
+        } else if (this.responseText == 'inv_size') {
+          swal("warning", "Image should be less then 1MB !", "error");
 
-</script>
-  
+        } else if (this.responseText == 'upd_failed') {
+          swal("warning", "Image upload failed.Server Down !", "error");
+
+        } else {
+
+          swal("Done", "New Facility Added !", "success");
+          // facility_data.reset();
+        
+           
+        
+
+        }
+
+
+      }
+
+      xhr.send(data);
+
+    }
+
+
+    window.onload = function() {
+
+      get_features();
+
+    }
+  </script>
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  
+
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 

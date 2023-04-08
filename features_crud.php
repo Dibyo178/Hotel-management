@@ -73,15 +73,34 @@
 
     $frm_data= filteration($_POST);
 
-    $img_r= uploadImage()
+    $img_r= uploadSVGImage($_FILES['icon'],ABOUT_FOLDER);
 
-    $values= [$frm_data['rem_feature']];
-   
-    $q= "DELETE FROM `facilities` WHERE `id`=?"; 
+   if($img_r == 'inv_img'){
+     
+       echo $img_r;
 
-    $res=delete($q,$values,'i');
+   } 
 
-    echo $res;
+   else if($img_r == 'inv_size'){
+
+          echo $img_r;
+   }
+
+  else if($img_r == 'upd_falied'){
+
+   echo  $img_r;
+  }
+
+  else{
+
+     $q= "INSERT INTO `facilities_item`(`icon`, `name`, `desc`) VALUES (?,?,?)";
+
+     $values = [$img_r,$frm_data['name'],$frm_data['desc']];
+      
+     $res = insert($q,$values,'sss');
+     
+     echo $res;
+  }
 
 
 
