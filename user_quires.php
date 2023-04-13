@@ -92,6 +92,7 @@ if(isset($_GET['del'])){
 
       position: fixed;
       height: 100%;
+     
     }
     /* .custom-alert{
 
@@ -107,7 +108,7 @@ z-index: 100;
       #dashboard_menu {
         width: 100%;
         height: auto;
-        
+        z-index: 1000;
       }
 
       #main-content{
@@ -130,8 +131,9 @@ z-index: 100;
     <a href="logout.php" class="btn btn-light btn-sm">Log Out</a>
 
   </div>
+  <?php require('header.php'); ?>
 
-  <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu">
+  <!-- <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu">
 
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="container-fluid flex-lg-column align-items-stretch">
@@ -141,9 +143,7 @@ z-index: 100;
         </button>
         <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="adminDropdown">
           <ul class="nav nav-pills flex-column">
-            <!-- <li class="nav-item">
-              <a class="nav-link text-white active" aria-current="page" href="#">Active</a>
-            </li> -->
+         
             <li class="nav-item">
               <a class="nav-link text-white " href="dashboard.php">Dashboard</a>
             </li>
@@ -165,15 +165,13 @@ z-index: 100;
             <li class="nav-item">
               <a class="nav-link text-white" href="setting.php">Settings</a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link text-white disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li> -->
+           
           </ul>
         </div>
       </div>
     </nav>
 
-  </div>
+  </div> -->
 
   <div class="container-fluid" id="main-content">
     <div class="row">
@@ -193,7 +191,7 @@ z-index: 100;
               
           <div class="table-responsive md" style="height:450px; overflow-y:scroll;">
           <table class="table table-hover border">
-  <thead class="sticky-top">
+  <thead>
     <tr class="bg-dark text-light" >
       <th scope="col">#</th>
       <th scope="col">Name</th>

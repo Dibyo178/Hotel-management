@@ -53,6 +53,9 @@
 
 
 
+
+
+
  if(isset($_POST['rem_feature'])){
 
     $frm_data= filteration($_POST);
@@ -69,42 +72,102 @@
 
  }
 
- if(isset($_POST['add_facility'])){
+ if(isset($_POST['rem_facility'])){
 
-    $frm_data= filteration($_POST);
+   $frm_data= filteration($_POST);
 
-    $img_r= uploadSVGImage($_FILES['icon'],ABOUT_FOLDER);
+   $values= [$frm_data['rem_facility']];
+  
+   $q= "DELETE FROM ` facilities_item` WHERE `id`=?"; 
 
-   if($img_r == 'inv_img'){
+   $res=delete($q,$values,'i');
+
+   echo $res;
+
+
+
+}
+
+//  if(isset($_POST['add_facility'])){
+
+//     $frm_data= filteration($_POST);
+
+//     $img_r= uploadSVGImage($_FILES['icon'],ABOUT_FOLDER);
+
+//    if($img_r == 'inv_img'){
      
-       echo $img_r;
+//        echo $img_r;
 
-   } 
+//    } 
 
-   else if($img_r == 'inv_size'){
+//    else if($img_r == 'inv_size'){
 
-          echo $img_r;
-   }
+//           echo $img_r;
+//    }
 
-  else if($img_r == 'upd_falied'){
+//   else if($img_r == 'upd_falied'){
 
-   echo  $img_r;
-  }
+//    echo  $img_r;
+//   }
 
-  else{
+//   else{
 
-     $q= "INSERT INTO `facilities_item`(`icon`, `name`, `desc`) VALUES (?,?,?)";
+//      $q= "INSERT INTO `facilities_item`(`icon`, `name`, `about`) VALUES (?,?,?)";
 
-     $values = [$img_r,$frm_data['name'],$frm_data['desc']];
+//      $values = [$img_r,$frm_data['name'],$frm_data['about']];
       
-     $res = insert($q,$values,'sss');
+//      $res = insert($q,$values,'sss');
      
-     echo $res;
-  }
+//      echo $res;
+//   }
+
+ 
+// $name = $_POST['name'];
+// $desc = $_POST['desc'];
+
+// $frm_data= filteration($_POST);
+
+// $imageName= uploadSVGImage($_FILES['icon'],ABOUT_FOLDER);
+
+// $imageName = $_FILES['image']['name'];
+
+
+// $tmpname = $_FILES['image']['tmp_name'];
+
+// $uploc =  'image/backendImg/' . $imageName;
+
+// $q = "INSERT INTO facilities_item ( icon, name,about) VALUES ($imageName,'name','about')";
+
+// // $values=[$imageName,$frm_data['name'],$frm_data['about']];
 
 
 
- }
+
+// if (mysqli_query($con, $q) == TRUE) {
+
+//   move_uploaded_file($tmpname, $uploc);
+
+//   echo
+
+//   '<div class="custom-alert alert alert-success alert-dismissible fade show" role="alert">
+// <strong >Inserted data</strong></strong>
+// <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+// </div>';
+// } else {
+
+
+//   echo
+//   '<div class="custom-alert alert alert-danger alert-dismissible fade show" role="alert">
+// <strong >Error </strong>
+// <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+// </div>';
+// }
+
+// }
+
+
+
+ 
 
   
 

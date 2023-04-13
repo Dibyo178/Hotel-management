@@ -1,15 +1,15 @@
 <?php
 
-define('SITE_URL','http://localhost/Hotel%20zafran/Hotel-zafran/');
+// define('SITE_URL','http://localhost/Hotel%20zafran/Hotel-zafran/');
 
-define('ABOUT_IMG_PATH',SITE_URL.'/image/about');
+// define('ABOUT_IMG_PATH',SITE_URL.'image/backendImg/');
 
  
 // backend purpose data
 
-define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'image/');
+define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Hotel-zafran/image/');
 
-define('ABOUT_FOLDER','about/');
+define('ABOUT_FOLDER','backendImg/');
 
 function adminLogin(){
 
@@ -81,7 +81,7 @@ alert;
 
 function uploadSVGImage($image,$folder){
    
-  $valid_mime = ['image/svg+xml'];
+  $valid_mime = ['image/jpg','image/png','image/svg+xml'];
 
   $img_mime = $image['type'];
 

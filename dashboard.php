@@ -55,7 +55,9 @@ adminLogin();
 
   </div>
 
-  <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu">
+  <?php require('header.php'); ?>
+
+  <!-- <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu">
 
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="container-fluid flex-lg-column align-items-stretch">
@@ -65,9 +67,7 @@ adminLogin();
         </button>
         <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="adminDropdown">
           <ul class="nav nav-pills flex-column">
-            <!-- <li class="nav-item">
-              <a class="nav-link text-white active" aria-current="page" href="#">Active</a>
-            </li> -->
+      
             <li class="nav-item">
               <a class="nav-link text-white " href="dashboard.php">Dashboard</a>
             </li>
@@ -75,10 +75,13 @@ adminLogin();
               <a class="nav-link text-white" href="#">Rooms</a>
             </li>
 
-
+    
             <li class="nav-item">
               <a class="nav-link text-white" href="features.php">Facilites</a>
             </li>
+
+
+           
    
 
             <li class="nav-item">
@@ -90,15 +93,13 @@ adminLogin();
             <li class="nav-item">
               <a class="nav-link text-white" href="setting.php">Settings</a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link text-white disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li> -->
+         
           </ul>
         </div>
       </div>
     </nav>
 
-  </div>
+  </div> -->
 
   <div class="container-fluid" id="main-content">
     <div class="row">

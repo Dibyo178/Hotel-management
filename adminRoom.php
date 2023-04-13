@@ -21,13 +21,13 @@ adminLogin();
   <link text-white rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
   <link rel="stylesheet" href="admin.css">
-  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
     }
-</script>
+  </script>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -81,63 +81,20 @@ adminLogin();
   <?php require('header.php'); ?>
 
 
-<!-- 
-  <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard_menu">
-
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="container-fluid flex-lg-column align-items-stretch">
-        <h4 class="mt-2 text-light">Admin Panel</h4>
-        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="adminDropdown">
-          <ul class="nav nav-pills flex-column">
-         
-            <li class="nav-item">
-              <a class="nav-link text-white " href="dashboard.php">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Rooms</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link text-white" href="features.php">Facilites</a>
-            </li>
-
-
-
-            <li class="nav-item">
-              <a class="nav-link text-white" href="user_quires.php">User-quires</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Users</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="setting.php">Settings</a>
-            </li>
-           
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-  </div> -->
 
   <div class="container-fluid" id="main-content">
     <div class="row">
       <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-        <h3>Edit  Facilites & Fcailities</h3>
+        <h3>Edit Rooms</h3>
 
 
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
 
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h5 class="card-title m-0 ">
-                Features
-              </h5>
+            <div class="text-end mb-4">
 
-              <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-5">
+
+              <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#add-room">
 
                 <i class="bi bi-plus-square"></i> Add
 
@@ -145,7 +102,7 @@ adminLogin();
 
             </div>
 
-       
+
 
             <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
               <table class="table table-hover border">
@@ -153,11 +110,96 @@ adminLogin();
                   <tr class="bg-dark text-light">
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-
+                    <th scope="col">Area</th>
+                    <th scope="col">Guests</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody id="features_data">
+                <tbody id="room_data">
+
+
+
+                  <?php
+
+
+                  //  show data of the facility table feach from database
+
+                  $sql = "SELECT * FROM room ORDER BY id DESC ";
+
+                  $res = mysqli_query($con, $sql);
+
+
+                  $i = 1;
+
+
+
+                  while ($row = mysqli_fetch_assoc($res)) {
+
+                    // if($row['status'] == 1){
+
+                    //   $status = "<button onclick='toggleStatus($row[id],0)' class='btn btn-success'>active</button>";
+                       
+                    // }
+
+                    // else{
+
+                    //   $status = "<button onclick='toggleStatus($row[id],1)' class='btn btn-warning'>inactive</button>";
+
+
+                    // }
+
+                   
+                                     
+          
+                                     
+                              
+
+
+
+                    echo <<<data
+
+   
+                    <tr class='align-middle'>
+                    <td>$i</td>
+                    <td>$row[name]</td>
+                    <td>$row[area] sq.ft.</td>
+                   
+                    <td>
+                    <span class='bg rounded-pill bg-light text-dark'>
+                     Adult: $row[adult]
+                    </span><br>
+                    <span class='bg rounded-pill bg-light text-dark'>
+                    Children: $row[children]
+                   </span>
+                    </td>
+                   
+                    <td>$row[price]</td>
+                    <td>$row[quantity]</td>
+                    <td>          if($row[status]==1){
+      echo '<p><a href="update.php?tid=.$row[id].&status=0" class="btn btn-success">Done</a></p>';
+                                    }
+                                   else{ 
+                                       
+       echo '<p><a href="update.php?tid=.$row[id].&status=1" class="btn btn-warning">none</a></p>';
+                                   }
+                                   
+                                   </td>
+                    <td>Button</td>
+                   </tr>
+
+
+data;
+
+                    $i++;
+                  }
+
+
+
+
+                  ?>
 
                 </tbody>
               </table>
@@ -169,13 +211,11 @@ adminLogin();
         <!-- Facilities 2 -->
 
 
-        <div class="card border-0 shadow-sm mb-4">
+        <!-- <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
 
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <h5 class="card-title m-0 ">
-                Facilities
-              </h5>
+            <div class=" text-end  mb-4">
+           
 
               <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
 
@@ -190,7 +230,7 @@ adminLogin();
             <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
               <table class="table table-hover border">
                 <thead>
-                  <!-- <thead class="sticky-top"> -->
+               
                   <tr class="bg-dark text-light">
                     <th scope="col">#</th>
                     <th scope="col">Icon</th>
@@ -204,7 +244,7 @@ adminLogin();
                   <?php
 
 
-                  //  show data of the facility table feach from database
+
 
                   $sql = "SELECT * FROM facilities_item ORDER BY id DESC ";
 
@@ -239,7 +279,7 @@ adminLogin();
                     $i++;
                   }
 
-                 
+
 
 
                   ?>
@@ -248,39 +288,126 @@ adminLogin();
               </table>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
 
-        <!-- </div>
-    </div>
-  </div> -->
 
 
 
-        <!-- Features Modal -->
-        <div class="modal fade" id="feature-5" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
 
-            <form id="features_s_form">
+        <!-- Add room Modal -->
+        <div class="modal fade" id="add-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-lg">
+
+            <form id="room_form" autocomplete="off">
 
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Add Features</h5>
+                  <h5 class="modal-title" id="staticBackdropLabel">Add Rooms</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
                 </div>
                 <div class="modal-body">
 
-                  <div class="mb-3">
-                    <label class="form-label">Name</label>
-                    <textarea class="form-control  shadow-none" name="features_name" rows="1"></textarea>
-                    <!-- <input type="text" name="site-title" class="form-control shadow-none" id="site_title_inp"> -->
+                  <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Name</label>
+                      <input type="text" class="form-control  shadow-none" name="room_name">
+                      <!-- <textarea class="form-control  shadow-none" name="room_name" rows="1"></textarea> -->
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Area</label>
+                      <input type="number" min='1' name="room_area" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Price</label>
+                      <input type="number" min='1' name="room_price" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Quantity</label>
+                      <input type="number" min='1' name="room_quantity" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Adult(Max.)</label>
+                      <input type="number" min='1' name="room_adult" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Child(Max.)</label>
+                      <input type="number" min='1' name="room_child" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label class="form-label fw-bold">Features</label>
+
+                      <div class="row">
+                        <?php
+
+                        $res = selectAll('facilities');
+
+                        while ($opt = mysqli_fetch_assoc($res)) {
+
+                          echo "
+                                  
+                                 <div class='col-md-3'>
+                                      <label>
+                                    <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
+
+                                         $opt[name]
+   
+
+                                      </label>   
+                                 </div>
+                                 
+                                ";
+                        }
+                        ?>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <label class="form-label fw-bold">Facilities</label>
+
+                      <div class="row">
+                        <?php
+
+                        $res = selectAll('facilities_item');
+
+                        while ($opt = mysqli_fetch_assoc($res)) {
+
+                          echo "
+                                  
+                                 <div class='col-md-3'>
+                                      <label>
+                                    <input type='checkbox' name='facilities' value='$opt[id]' class='form-check-input shadow-none'>
+
+                                         $opt[name]
+   
+
+                                      </label>   
+                                 </div>
+                                 
+                                ";
+                        }
+                        ?>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                      <label for="" class="form-label fw-bold">Description</label>
+
+                      <textarea name="room_desc" rows="4" class="form-control shadow-none" requires></textarea>
+                    </div>
+
                   </div>
 
-                  <!-- <div class="mb-3">
-                                                <label class="form-label">About Us</label>
-                                                <textarea class="form-control  shadow-none" name="site_about" rows="1" id="site_about_inp"></textarea>
-                                            </div> -->
 
 
                 </div>
@@ -304,7 +431,7 @@ adminLogin();
         <div class="modal fade" id="facility-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
 
-            <form  id="facility_form" method="POST" enctype="multipart/form-data">
+            <form id="facility_form" method="POST" enctype="multipart/form-data">
 
               <div class="modal-content">
                 <div class="modal-header">
@@ -351,7 +478,7 @@ adminLogin();
 
             </form>
 
-          
+
 
 
           </div>
@@ -415,7 +542,7 @@ adminLogin();
 
 
 
-        <script>
+        <!-- <script>
           let features_s_form = document.getElementById('features_s_form');
 
           let facility_s_form = document.getElementById('facility_form');
@@ -640,66 +767,59 @@ adminLogin();
 
 
           }
-        </script>
+        </script> -->
 
-<!-- // facility -->
+        <!-- // facility -->
 
-<?php
-
-     
-
-if (isset($_POST['submit'])) {
+        <?php
 
 
 
-  $name = $_POST['name'];
-  $desc = $_POST['desc'];
+        // if (isset($_POST['submit'])) {
 
 
 
-  $imageName = $_FILES['image']['name'];
-
-
-  $tmpname = $_FILES['image']['tmp_name'];
-
-  $uploc =  'image/backendImg/' . $imageName;
-
-  $q = "INSERT INTO facilities_item ( icon, name,about) VALUES ('$imageName','$name','$desc')";
-
- 
-
-
-  if (mysqli_query($con, $q) == TRUE) {
-
-    move_uploaded_file($tmpname, $uploc);
-
-   
-
-    echo
-
-    '<div class="custom-alert alert alert-success alert-dismissible fade show" role="alert">
-<strong >Inserted data</strong></strong>
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
+        //   $name = $_POST['name'];
+        //   $desc = $_POST['desc'];
 
 
 
-  } else {
+        //   $imageName = $_FILES['image']['name'];
 
 
-    echo
-    '<div class="custom-alert alert alert-danger alert-dismissible fade show" role="alert">
-<strong >Error </strong>
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-  }
+        //   $tmpname = $_FILES['image']['tmp_name'];
+
+        //   $uploc =  'image/backendImg/' . $imageName;
+
+        //   $q = "INSERT INTO facilities_item ( icon, name,about) VALUES ('$imageName','$name','$desc')";
 
 
-}
 
-?>
 
-<!-- <script>
+        //   if (mysqli_query($con, $q) == TRUE) {
+
+        //     move_uploaded_file($tmpname, $uploc);
+
+        //     echo
+
+        //     '<div class="custom-alert alert alert-success alert-dismissible fade show" role="alert">
+        // <strong >Inserted data</strong></strong>
+        // <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        // </div>';
+        //   } else {
+
+
+        //     echo
+        //     '<div class="custom-alert alert alert-danger alert-dismissible fade show" role="alert">
+        // <strong >Error </strong>
+        // <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        // </div>';
+        //   }
+        // }
+
+        ?>
+
+        <!-- <script>
 
 $(document).ready(function() {
         $('.btndelete').click(function() {
@@ -769,8 +889,8 @@ $(document).ready(function() {
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  
-<!-- 
+
+        <!-- 
     <script>
  $('.btndelete').click(function(e){
  
@@ -815,6 +935,136 @@ $(document).ready(function() {
 
     </script>
          -->
+
+        <script>
+          let room_form = document.getElementById('room_form');
+
+          room_form.addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            add_rooms();
+
+          });
+
+          function add_rooms() {
+
+            let data = new FormData();
+
+            data.append('add_room', '');
+
+            data.append('name', room_form.elements['room_name'].value);
+            data.append('area', room_form.elements['room_area'].value);
+            data.append('price', room_form.elements['room_price'].value);
+            data.append('quantity', room_form.elements['room_quantity'].value);
+            data.append('adult', room_form.elements['room_adult'].value);
+            data.append('children', room_form.elements['room_child'].value);
+            data.append('description', room_form.elements['room_desc'].value);
+
+            let features = [];
+
+            room_form.elements['features'].forEach(element => {
+
+              if (element.checked) {
+
+                features.push(element.value);
+              }
+
+            });
+
+            let facilities = [];
+
+            room_form.elements['facilities'].forEach(element => {
+
+              if (element.checked) {
+
+                facilities.push(element.value);
+              }
+
+            });
+
+
+            data.append('features', JSON.stringify(features));
+
+            data.append('facilities', JSON.stringify(facilities));
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "rooms_crud.php", true);
+
+
+
+            xhr.onload = function() {
+
+
+              var myModal = document.getElementById('add-room');
+              var modal = bootstrap.Modal.getInstance(myModal);
+              modal.hide();
+
+              if (this.responseText == 1) {
+
+                //   alert('success','New room added');
+
+                swal("Good job!", "Facilities Add", "success");
+
+                room_form.reset();
+
+
+
+              } else {
+
+                alert('error', 'server down');
+
+
+              }
+
+
+            }
+
+            xhr.send(data);
+
+
+
+          }
+
+
+          //  window.onload = add_rooms;
+
+
+
+
+
+          // function get_room() {
+
+
+
+          //   let xhr = new XMLHttpRequest();
+
+          //   xhr.open("POST", "rooms_crud.php", true);
+
+          //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
+
+
+          //   xhr.onload = function() {
+
+
+          //     // var myModal = document.getElementById('add-room');
+          //     // var modal = bootstrap.Modal.getInstance(myModal);
+          //     // modal.hide();
+
+
+          //     document.getElementById('room_data').innerHTMl = this.responseText;
+
+
+          //   }
+
+          //   xhr.send('get_room');
+          // }
+
+          // window.onload = function() {
+          //   get_room();
+          // }
+        </script>
 
 
 </body>
