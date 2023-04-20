@@ -105,7 +105,7 @@ adminLogin();
 
 
             <div class="table-responsive md" style="height:350px; overflow-y:scroll;">
-              <table class="table table-hover border">
+              <table class="table table-hover border text-center">
                 <thead>
                   <tr class="bg-dark text-light">
                     <th scope="col">#</th>
@@ -138,68 +138,82 @@ adminLogin();
 
                   while ($row = mysqli_fetch_assoc($res)) {
 
-                    // if($row['status'] == 1){
-
-                    //   $status = "<button onclick='toggleStatus($row[id],0)' class='btn btn-success'>active</button>";
-                       
-                    // }
-
-                    // else{
-
-                    //   $status = "<button onclick='toggleStatus($row[id],1)' class='btn btn-warning'>inactive</button>";
-
-
-                    // }
-
-                   
-                                     
-          
-                                     
-                              
+                  ?>
 
 
 
-                    echo <<<data
 
-   
+
+
+
+
+
+
+
+                    <!-- echo <<<data -->
+
+
                     <tr class='align-middle'>
-                    <td>$i</td>
-                    <td>$row[name]</td>
-                    <td>$row[area] sq.ft.</td>
-                   
-                    <td>
-                    <span class='bg rounded-pill bg-light text-dark'>
-                     Adult: $row[adult]
-                    </span><br>
-                    <span class='bg rounded-pill bg-light text-dark'>
-                    Children: $row[children]
-                   </span>
-                    </td>
-                   
-                    <td>$row[price]</td>
-                    <td>$row[quantity]</td>
-                    <td>          if($row[status]==1){
-      echo '<p><a href="update.php?tid=.$row[id].&status=0" class="btn btn-success">Done</a></p>';
-                                    }
-                                   else{ 
-                                       
-       echo '<p><a href="update.php?tid=.$row[id].&status=1" class="btn btn-warning">none</a></p>';
-                                   }
-                                   
-                                   </td>
-                    <td>Button</td>
-                   </tr>
+                      <!-- <td>$i</td> -->
+                      <td><?php echo $i ?></td>
+                      <td><?php echo $row['name'] ?></td>
+                      <td><?php echo $row['area']  ?>sq.ft.</td>
+
+                      <td>
+                        <span class='bg rounded-pill bg-light text-dark'>
+                          Adult: <?php echo $row['adult'] ?>
+                        </span><br>
+                        <span class='bg rounded-pill bg-light text-dark'>
+                          Children: <?php echo $row['children'] ?>
+                        </span>
+                      </td>
+
+                      <td><?php echo $row['price'] ?></td>
+                      <td><?php echo $row['quantity'] ?></td>
+                      <td>
+
+                        <?php
 
 
-data;
+                        if ($row['status'] == 1) {
+                          echo '<p><a href="update.php?id=' . $row['id'] . '&status=0" class="btn btn-success">Active</a></p>';
+                        } else {
 
+                          echo '<p><a href="update.php?id=' . $row['id'] . '&status=1" class="btn btn-warning">Inactive</a></p>';
+                        }
+                        ?>
+                      </td>
+
+                      <td>
+
+
+
+                           
+                     <button class="btn btn-Danger shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#edit-room"> <i class="bi bi-pencil-square"></i>Edit</button>
+
+                
+<!--                        
+                     <button onclick="edit_details('<?php echo $row['id'] ;?>')" class="btn btn-primary shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#edit-room"> <i class="bi bi-pencil-square"></i>Edit</button> -->
+                       
+                       
+               
+
+
+                      </td>
+
+
+                    </tr>
+
+
+                    <!-- data; -->
+                  <?php
                     $i++;
                   }
-
-
-
-
                   ?>
+
+
+
+
 
                 </tbody>
               </table>
@@ -347,6 +361,133 @@ data;
                       <div class="row">
                         <?php
 
+                        // $res = selectAll('facilities');
+
+                        // while ($opt = mysqli_fetch_assoc($res)) {
+
+                        //   echo "
+                                  
+                        //          <div class='col-md-3'>
+                        //               <label>
+                        //             <input type='checkbox' name='features' value='$opt[id]' class='form-check-input shadow-none'>
+
+                        //                  $opt[name]
+   
+
+                        //               </label>   
+                        //          </div>
+                                 
+                        //         ";
+                        // }
+                        ?>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <label class="form-label fw-bold">Facilities</label>
+
+                      <div class="row">
+                        <?php
+
+                        // $res = selectAll('facilities_item');
+
+                        // while ($opt = mysqli_fetch_assoc($res)) {
+
+                        //   echo "
+                                  
+                        //          <div class='col-md-3'>
+                        //               <label>
+                        //             <input type='checkbox' name='facilities' value='$opt[id]' class='form-check-input shadow-none'>
+
+                        //                  $opt[name]
+   
+
+                        //               </label>   
+                        //          </div>
+                                 
+                        //         ";
+                        // }
+                        ?>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+
+                      <label for="" class="form-label fw-bold">Description</label>
+
+                      <textarea name="room_desc" rows="4" class="form-control shadow-none" requires></textarea>
+                    </div>
+
+                  </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="reset" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-success shadow-none">Submit</button>
+                </div>
+              </div>
+
+            </form>
+
+
+          </div>
+        </div>
+
+          <!-- Edit room Modal -->
+          <div class="modal fade" id="edit-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-lg">
+
+            <form id="edit_room_form" autocomplete="off">
+
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">EditRooms</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Name</label>
+                      <input type="text" class="form-control  shadow-none" name="room_name">
+                      <!-- <textarea class="form-control  shadow-none" name="room_name" rows="1"></textarea> -->
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Area</label>
+                      <input type="number" min='1' name="room_area" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Price</label>
+                      <input type="number" min='1' name="room_price" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Quantity</label>
+                      <input type="number" min='1' name="room_quantity" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Adult(Max.)</label>
+                      <input type="number" min='1' name="room_adult" class="form-control shadow-none" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Child(Max.)</label>
+                      <input type="number" min='1' name="room_child" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label class="form-label fw-bold">Features</label>
+
+                      <div class="row">
+                        <?php
+
                         $res = selectAll('facilities');
 
                         while ($opt = mysqli_fetch_assoc($res)) {
@@ -405,6 +546,8 @@ data;
 
                       <textarea name="room_desc" rows="4" class="form-control shadow-none" requires></textarea>
                     </div>
+
+                    <input type="hidden" name="editroom_id">
 
                   </div>
 
@@ -1065,6 +1208,37 @@ $(document).ready(function() {
           //   get_room();
           // }
         </script>
+
+        <script>
+
+//  let edit_room_form = document.getElementById('edit_room_form');
+ 
+//   function edit_details(id){
+
+//      let xhr =  new XMLHttpRequest();
+
+//      xhr.open("POST","ajax.php",true);
+
+//      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+//      xhr.onload = function(){
+           
+//        console.log(this.responseText);
+         
+//      }
+    
+//      xhr.send('get_room='+id); 
+   
+//   }
+
+// //  window.onload= function(){
+// //   get-room();
+// //  };
+
+
+        </script>
+
+   
 
 
 </body>

@@ -5,12 +5,12 @@
 $con=mysqli_connect("localhost","root","","jfaran");
 
 
-$id=$_GET['tid'];
+$id=$_GET['id'];
 
 $status=$_GET['status'];
 
 
-$q="update room set status=$status where tid =$id";
+$q="update room set status=$status where id =$id";
 
 mysqli_query($con,$q);
 

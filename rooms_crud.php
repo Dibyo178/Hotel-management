@@ -9,13 +9,16 @@
 
  if(isset($_POST['add_room'])){
 
-   $features= filteration(json_decode($_POST['features']));
+  //  $features= filteration(json_decode($_POST['features']));
 
-   $facilities= filteration(json_decode($_POST['facilities']));
+  //  $facilities= filteration(json_decode($_POST['facilities']));
 
    $frm_data = filteration($_POST);
 
    $flag= 0;
+
+  //  $lang=$_POST['facilities'];
+  //  $lang1= implode(',',$lang);
 
    $q1= "INSERT INTO `room`(`name`, `area`, `quantity`, `adult`, `description`,  `children`, `price`) VALUES (?,?,?,?,?,?,?)";
 
@@ -27,72 +30,72 @@
          $flag=1;
     }
 
-      $room_id= mysqli_insert_id($con);
+      // $room_id= mysqli_insert_id($con);
 
 
-    $q2 = "INSERT INTO `room_facilities`(`room_id`, `facilities_id`) VALUES (?,?)";
+    // $q2 = "INSERT INTO `room_facilities`(`room_id`, `facilities_id`) VALUES (?,?)";
 
-       if($stmt = mysqli_prepare($con,$q2)){
+    //    if($stmt = mysqli_prepare($con,$q2)){
 
-         foreach($facilities as $f){
+    //      foreach($facilities as $f){
 
-            mysqli_stmt_bind_param($stmt,'ii',$room_id,$f);
+    //         mysqli_stmt_bind_param($stmt,'ii',$room_id,$f);
 
           
-            mysqli_stmt_execute($stmt);
+    //         mysqli_stmt_execute($stmt);
 
 
-         }
-         mysqli_stmt_close($stmt);
+    //      }
+    //      mysqli_stmt_close($stmt);
        
 
-       }
+    //    }
 
 
-       else{
+    //    else{
 
-         $flag=0;
+    //      $flag=0;
          
-        die('query cannot be prepared');
+    //     die('query cannot be prepared');
           
-      }
+    //   }
 
 
 
-      $q3 = "INSERT INTO `room_features`(`room_id`, `features_id`) VALUES (?,?)";
+    //   $q3 = "INSERT INTO `room_features`(`room_id`, `features_id`) VALUES (?,?)";
 
-      if($stmt = mysqli_prepare($con,$q3)){
+    //   if($stmt = mysqli_prepare($con,$q3)){
 
-        foreach($features as $f){
+    //     foreach($features as $f){
 
-           mysqli_stmt_bind_param($stmt,'ii',$room_id,$f);
+    //        mysqli_stmt_bind_param($stmt,'ii',$room_id,$f);
 
          
-           mysqli_stmt_execute($stmt);
+    //        mysqli_stmt_execute($stmt);
 
 
-        }
-        mysqli_stmt_close($stmt);
+    //     }
+    //     mysqli_stmt_close($stmt);
       
 
-      }
+    //   }
 
 
-      else{
+    //   else{
 
-        $flag=0;
+    //     $flag=0;
         
-       die('query cannot be prepared');
+    //    die('query cannot be prepared');
          
-     }
+    //  }
 
-     if($flag){
+    //  if($flag){
 
-       echo 1;
-     }
-     else{
-      echo 0;
-     }
+    //    echo 1;
+    //  }
+    //  else{
+    //   echo 0;
+    //  }
 
  }
 

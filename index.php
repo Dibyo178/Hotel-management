@@ -2,7 +2,10 @@
 
 require('connection.php');
 
+require('connectdb.php');
 ?>
+
+
 
 
 <!doctype html>
@@ -15,6 +18,7 @@ require('connection.php');
     <link rel="icon" href="image/Hotel-jafran/logo.jpeg" type="image/png">
     <title>Hotel Zafran</title>
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="vendors/linericon/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -64,7 +68,7 @@ require('connection.php');
                     <h6>Hotel Grand Zafran</h6>
                     <h2 class="header-text">Relax Your Mind</h2>
                     <!-- <p>Cukup dengan merogoh kocek mulai dari Rp350.000, Anda sudah bisa mendapat penginapan dengan kualitas mantap tapi harga bersahabat. <br>Hotel ini cocok bagi wisatawan yang ingin jalan-jalan.</p> -->
-                    <a href="#" class="btn theme_btn button_hover">Learn More</a>
+                    <!-- <a href="#" class="btn theme_btn button_hover">Learn More</a> -->
                 </div>
             </div>
         </div>
@@ -169,13 +173,222 @@ require('connection.php');
                 <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, </p>
             </div>
             <div class="row mb_30 justify-content-center">
-                <div class="col-lg-3 col-sm-6">
+
+                <!-- Start Our backend Code -->
+
+                <?php
+
+                $res = selectAll('room_add');
+
+                $path = './image/backendImg';
+
+                while ($row =  mysqli_fetch_assoc($res)) {
+
+                    echo <<<data
+
+                    <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center">
+                        <div class="hotel_img">
+                            <img src="./image/backendImg/$row[image]" alt="" width="270" height="270" style="border-radius: 20px; box-shadow: 2px 1px 10px rgb(211, 211, 211);">
+                           <button class="btn view_btn  button_hover "  data-bs-toggle="modal" data-bs-target="#edit-book" style="background-color:#0F946A;color:white;margin-top:5px">Book Now</button>
+                        </div>
+                        <div class="d-flex justify-content-between facilitas-show">
+                            <div class="details-container">
+                                <img src="image/Hotel-jafran/checked.png" alt="tick" style="width: 30px;" class="list-icon">
+                                <p class="list-text" style="font-size: 13px;">$row[member] Persons</p>
+                            </div>
+                            <div class="details-container" style="cursor: pointer;" onclick="createAlert('','Facilities & Features','$row[facilities], $row[features]','success',true,true,'$row[id]',);">
+                                <img src="image/Hotel-jafran/file.png" style="width:30px" alt="tick" class="list-icon">
+                                <p class="list-text" style="font-size: 13px;">Facilities & Features</p>
+                            </div>
+                        </div>
+                    
+                        <a href="#">
+                            <h4 class="sec_h4 header-text" style="font-size: 24px;">$row[name]</h4>
+                        </a>
+                        <h5>$row[price]<small>.-/ BDT</small></h5>
+                    </div>
+                </div>
+
+
+data;
+                }
+
+                ?>
+
+                <!-- Modal -->
+
+
+
+
+
+
+                <?php
+
+
+                function fill_customer($pdo)
+                {
+
+                    $output_customer = '';
+
+                    $select = $pdo->prepare("select * from   room_add order by name asc");
+                    $select->execute();
+
+                    $result1_customer = $select->fetchAll();
+
+                    foreach ($result1_customer as $row) {
+
+                        $output_customer .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+                    }
+
+                    return $output_customer;
+                }
+
+                ?>
+
+
+
+                <div class="modal fade" id="edit-book" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+
+                        <form id="room_form" autocomplete="off">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add Rooms</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id=""></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Customer Name</label>
+                                            <input type="text" name="customer_name" id="customer_name" class="form-control shadow-none" required>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Customer Mobile</label>
+                                            <input type="text" name="customer_mobile" id="customer_mobile" class="form-control shadow-none" required>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Customer Address</label>
+                                            <input type="text" name="customer_address" id="customer_mobile" class="form-control shadow-none" required>
+                                        </div>
+
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">From Date</label>
+                                            <input type="date" name="from_date" id="from_date" class="form-control shadow-none" required>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">To Date</label>
+                                            <input type="date" name="to_date" id="to_date" class="form-control shadow-none" required>
+                                        </div>
+
+
+
+                                        <div class="col-md-6 mb-3">
+
+                                            <!-- <input type="text" class="form-control  shadow-none" name="room_name"> -->
+                                            <!-- <textarea class="form-control  shadow-none" name="room_name" rows="1"></textarea> -->
+
+                                            <select class="form-control roomid" style="width: 415px;">
+
+                                                <option value="">Please Select Room</option><?php echo fill_customer($pdo); ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Room Name:</label>
+                                            <input type="text" name="room_name" id="room_name" style="border:none;" class="form-control shadow-none" value="" required>
+                                        </div>
+
+                                        <!-- <ul style="list-style: none;">
+                                            <li name="room_price" id="room_price" value=""></li>
+                                            <li name="room_person" id="room_person" value=""></li>
+                                            <li name="room_facilities" id="room_facilities" value=""></li>
+                                            <li name="room_features" id="room_features" value=""></li>
+                                        </ul> -->
+
+                                        <div>
+                                            <label class="form-label">Price:</label>
+                                            <input type="text" name="room_price" id="room_price" value="" style="border:none;" class="form-control shadow-none" required>
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label">Person:</label>
+                                            <input type="text" style="border:none;" name="room_person" id="room_person" value="" class="form-control shadow-none" required>
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label">Facilities:</label>
+                                            <input type="text" value="" name="room_facilities" id="room_facilities" class="form-control shadow-none" style="border:none;" required>
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label">Features</label>
+                                            <input type="text" name="room_features" id="room_features" value="" class="form-control shadow-none" style="border:none;" required>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success shadow-none">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+
+
+                <!-- <script>
+
+$(document).ready(function(){
+
+    $('.view_btn').click(function(){
+
+       e.preventDefault();
+     $('#edit-book').show();
+
+     
+    })
+
+})
+
+</script> -->
+
+
+                <!-- Button trigger modal -->
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button> -->
+
+
+
+
+
+
+
+
+                <!-- <div class="col-lg-3 col-sm-6">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
                             <img src="image/Hotel-jafran/j1.jpg" alt="" width="270" height="270" style="border-radius: 20px; box-shadow: 2px 1px 10px rgb(211, 211, 211);">
                             <a href="#" class="btn theme_btn button_hover">Book Now</a>
                         </div>
-                        <div class="d-flex justify-content-between facilitas-show">
+                        <div class="d-flex justify-content-between ">
                             <div class="details-container">
                                 <img src="image/Hotel-jafran/checked.png" alt="tick" style="width: 30px;" class="list-icon">
                                 <p class="list-text" style="font-size: 13px;">2/3/4 Persons</p>
@@ -268,7 +481,7 @@ require('connection.php');
                         </a>
                         <h5>2000<small>.-/ BDT</small></h5>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -288,16 +501,16 @@ require('connection.php');
             </div>
             <div class="row mb_30">
 
-            
-            <?php
 
-            $res = selectAll('facilities_item');
+                <?php
 
-            $path = './image/backendImg';
+                $res = selectAll('facilities_item');
 
-            while ($row =  mysqli_fetch_assoc($res)) {
+                $path = './image/backendImg';
 
-                echo <<<data
+                while ($row =  mysqli_fetch_assoc($res)) {
+
+                    echo <<<data
 
             <div class="col-lg-4 col-md-6 faci">
                 <div class="facilities_item" style="height:100px">
@@ -308,9 +521,9 @@ require('connection.php');
 
 
             data;
-            }
+                }
 
-            ?>
+                ?>
 
 
                 <!-- <div class="col-lg-4 col-md-6 faci">
@@ -384,7 +597,7 @@ require('connection.php');
         <div class="container">
             <div class="section_title text-center">
                 <h2 class="title_color header-text">What Client's Say ?</h2>
-                <hr style="width: 250px;border: 1px solid rgb(203, 77, 77);">
+                <hr style="width: 250px;border: 1px solid rgb(203, 77, 77);margin:auto">
             </div>
             <div class="testimonial_slider owl-carousel">
 
@@ -635,8 +848,61 @@ require('connection.php');
         }
     </script>
 
+
+
+
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $(".roomid").on('change', function(e) {
+
+                var roomid = this.value;
+                let ritem = $(this).parent().parent();
+                $.ajax({
+
+                    url: "getIdroom.php",
+                    method: "get",
+                    data: {
+                        id: roomid
+                    },
+                    success: function(result) {
+
+
+                        console.log(result);
+
+                        $("#room_name").val(result.name);
+
+                        $("#room_price").val(result.price);
+
+                        $("#room_person").val(result.member);
+
+                        $("#room_facilities").val(result.facilities);
+
+                        $("#room_features").val(result.features);
+
+
+
+
+
+
+                        //                    document.getElementById('payment_type').innerText=result.payment_type;
+
+
+
+
+                    }
+                })
+            })
+
+        })
+    </script>
+
+
 
 </body>
 

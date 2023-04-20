@@ -171,15 +171,12 @@ button:focus {
   text-transform: uppercase;
   color: #fff;
   font-weight: 600;
-  background: #0eb26b;
-  padding: 5px 30px;
+  background: #0c8652;
+  padding: 20px 30px;
 }
 
-/* .theme_btn:before {
+.theme_btn:before {
   background: #0c8652;
-} */
-.theme_btn:hover {
-   background-color: #0c8652;
 }
 
 .theme_btn:hover {
@@ -241,7 +238,7 @@ button:focus {
   background: #222222;
   color: #fff;
   text-transform: uppercase;
-  padding: 5px 29px;
+  padding: 20px 29px;
 }
 
 .book_now_btn {
@@ -496,7 +493,7 @@ button:focus {
 }
 
 .banner_area .bg-parallax {
-  background: url("../image/Hotel-jafran/j2.jpg") no-repeat scroll center 0/cover;
+  background: url("../image/img/slider/bangunan1.JPG") no-repeat scroll center 0/cover;
   opacity: 0.50;
 }
 
@@ -772,7 +769,7 @@ button:focus {
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
-  padding: 5px 25px;
+  padding: 20px 25px;
   max-width: 128px;
 }
 
@@ -823,7 +820,6 @@ button:focus {
   opacity: 0.15;
 }
 
-
 .facilities_item {
   border: 1px solid #777777;
   border-radius: 10px;
@@ -831,18 +827,7 @@ button:focus {
   padding: 31px 40px 37px;
   color: #fff;
   margin-bottom: 30px;
-  /* width: 19.875rem; */
- 
-  transition: 1s ease-in-out;
-  border: none;
 }
-.facilities_item:hover{
-
-  background: #984040;
-  border: none;
-
-}
-
 
 .facilities_item .sec_h4 {
   padding-bottom: 18px;
@@ -921,8 +906,7 @@ button:focus {
 /*----------------------------------------------------*/
 /*============ testimonial_area css ============*/
 .testimonial_area {
-  background: #fff;
-
+  background: #f9f9ff;
 }
 
 .testimonial_slider .testimonial_item {
@@ -955,7 +939,7 @@ button:focus {
 }
 
 .testimonial_slider .testimonial_item .star a {
-  color: #EAC22E;
+  color: #0c8652;
   font-size: 14px;
 }
 
@@ -967,7 +951,6 @@ button:focus {
 .testimonial_slider .owl-dots .owl-dot {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
   background: #eeeeee;
   display: inline-block;
   margin: 0px 5px;
@@ -976,7 +959,7 @@ button:focus {
 }
 
 .testimonial_slider .owl-dots .owl-dot.active {
-  background: lightcoral;
+  background: #0c8652;
 }
 
 /*---------------------------------------------------- */
@@ -3522,7 +3505,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer_title {
-  font-size: 23px;
+  font-size: 16px;
   line-height: 24px;
   font-weight: 600;
   color: #fff;
@@ -3541,31 +3524,25 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 46px;
 }
 
-.foot .footer-text a {
+.footer-bottom .footer-text a {
   color: #0c8652;
 }
 
-.foot .footer-social {
+.footer-bottom .footer-social {
   text-align: right;
-  display: flex;
 }
 
-.foot .footer-social a {
- 
-  font-size: 25px;
+.footer-bottom .footer-social a {
+  font-size: 18px;
   line-height: 30px;
   color: #82848f;
-  /* background: #298cdf; */
-  
-  margin-left: 15px;
+  margin-left: 25px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 
-.foot .footer-social a:hover {
- color: #0c8652;
-
- 
+.footer-bottom .footer-social a:hover {
+  color: #0c8652;
 }
 
 /*---------------------------------------------------- */
@@ -3606,10 +3583,3 @@ h1, h2, h3, h4, h5, h6 {
 .alert .fa {
   margin-right:.3em;
 }
-
-/* testimonial */
-
-ion-icon {
-  pointer-events: none;
-}
-
